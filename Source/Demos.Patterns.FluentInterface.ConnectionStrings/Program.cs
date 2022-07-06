@@ -22,9 +22,9 @@ string connectionString2 = new ConnectionStringBuilder()
 Console.WriteLine(connectionString2);
 
 string connectionString3 = new FluentConnectionStringBuilder()
-    .SetServerName(ServerName)
-    .SetDatabaseName(DatabaseName)
-    .SetUserName(UserName)
-    .SetPassword(Password)
+    .ForServer(ServerName)
+    .AndDatabase(DatabaseName)
+    .AsUser(UserName)
+    .WithPassword(Password)
     .Build();
 Console.WriteLine(connectionString3);

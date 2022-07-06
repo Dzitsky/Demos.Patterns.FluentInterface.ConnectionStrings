@@ -13,22 +13,22 @@ internal sealed class FluentConnectionStringBuilder
         return this;
     }
 
-    public FluentConnectionStringBuilder SetServerName(string serverName)
+    public FluentConnectionStringBuilder ForServer(string serverName)
     {
         return AddSetting($"Server={serverName}");
     }
 
-    public FluentConnectionStringBuilder SetDatabaseName(string databaseName)
+    public FluentConnectionStringBuilder AndDatabase(string databaseName)
     {
         return AddSetting($"Database={databaseName}");
     }
 
-    public FluentConnectionStringBuilder SetUserName(string userName)
+    public FluentConnectionStringBuilder AsUser(string userName)
     {
         return AddSetting($"User Id={userName}");
     }
 
-    public FluentConnectionStringBuilder SetPassword(string password)
+    public FluentConnectionStringBuilder WithPassword(string password)
     {
         return AddSetting($"Password={password}");
     }
