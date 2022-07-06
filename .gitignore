@@ -1,2 +1,6 @@
 # Visual Studio options/cache.
 .vs
+
+# Build results.
+bin
+obj
