@@ -1,4 +1,6 @@
-﻿namespace Demos.Patterns.FluentInterface.ConnectionStrings;
+﻿using System.Text;
+
+namespace Demos.Patterns.FluentInterface.ConnectionStrings;
 
 internal sealed class ConnectionStringBuilder
 {
@@ -6,6 +8,7 @@ internal sealed class ConnectionStringBuilder
     private string? databaseName;
     private string? userName;
     private string? password;
+    private bool isTrustedConnection;
 
     public ConnectionStringBuilder SetServerName(string serverName)
     {
@@ -31,8 +34,27 @@ internal sealed class ConnectionStringBuilder
         return this;
     }
 
+    public ConnectionStringBuilder SetTrustedConnection()
+    {
+        isTrustedConnection = true;
+        return this;
+    }
+
     public string Build()
     {
-        return $"Server={serverName};Database={databaseName};User Id={userName};Password={password}";
+        var stringBuilder = new StringBuilder();
+        stringBuilder.Append($"Server={serverName};Database={databaseName};");
+
+        if (isTrustedConnection)
+        {
+            stringBuilder.Append("Trusted_Connection=True;");
+        }
+        else
+        {
+            stringBuilder.Append($"User Id={userName};Password={password};");
+        }
+
+
+        return stringBuilder.ToString();
     }
 }
