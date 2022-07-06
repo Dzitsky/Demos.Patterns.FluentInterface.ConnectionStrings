@@ -61,7 +61,7 @@ internal sealed class FluentConnectionStringBuilder :
         return AddSetting($"User Id={userName}");
     }
 
-    public IConnectionStringBuilder WithPassword(string password)
+    public IAdditionSelection WithPassword(string password)
     {
         return AddSetting($"Password={password}");
     }

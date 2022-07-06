@@ -2,5 +2,5 @@
 
 internal interface IPasswordSelection
 {
-    IConnectionStringBuilder WithPassword(string password);
+    IAdditionSelection WithPassword(string password);
 }
