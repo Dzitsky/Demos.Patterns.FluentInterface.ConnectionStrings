@@ -1,60 +1,45 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Demos.Patterns.FluentInterface.ConnectionStrings;
 
 internal sealed class ConnectionStringBuilder
 {
-    private string? serverName;
-    private string? databaseName;
-    private string? userName;
-    private string? password;
-    private bool isTrustedConnection;
+    private readonly ICollection<string> settings = new List<string>();
+
+    private ConnectionStringBuilder AddSetting(string setting)
+    {
+        settings.Add(setting);
+
+        return this;
+    }
 
     public ConnectionStringBuilder SetServerName(string serverName)
     {
-        this.serverName = serverName;
-        return this;
+        return AddSetting($"Server={serverName}");
     }
 
     public ConnectionStringBuilder SetDatabaseName(string databaseName)
     {
-        this.databaseName = databaseName;
-        return this;
+        return AddSetting($"Database={databaseName}");
     }
 
     public ConnectionStringBuilder SetUserName(string userName)
     {
-        this.userName = userName;
-        return this;
+        return AddSetting($"User Id={userName}");
     }
 
     public ConnectionStringBuilder SetPassword(string password)
     {
-        this.password = password;
-        return this;
+        return AddSetting($"Password={password}");
     }
 
     public ConnectionStringBuilder SetTrustedConnection()
     {
-        isTrustedConnection = true;
-        return this;
+        return AddSetting("Trusted_Connection=True");
     }
 
     public string Build()
     {
-        var stringBuilder = new StringBuilder();
-        stringBuilder.Append($"Server={serverName};Database={databaseName};");
-
-        if (isTrustedConnection)
-        {
-            stringBuilder.Append("Trusted_Connection=True;");
-        }
-        else
-        {
-            stringBuilder.Append($"User Id={userName};Password={password};");
-        }
-
-
-        return stringBuilder.ToString();
+        return string.Join(";", settings);
     }
 }
