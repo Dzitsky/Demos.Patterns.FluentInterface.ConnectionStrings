@@ -2,5 +2,6 @@
 
 internal interface IUserSelection
 {
+    IConnectionStringBuilder AsTrusted();
     IPasswordSelection AsUser(string userName);
 }

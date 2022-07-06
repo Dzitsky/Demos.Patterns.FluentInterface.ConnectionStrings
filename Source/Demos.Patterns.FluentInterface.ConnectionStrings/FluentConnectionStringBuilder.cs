@@ -47,7 +47,7 @@ internal sealed class FluentConnectionStringBuilder :
         return AddSetting($"Password={password}");
     }
 
-    public FluentConnectionStringBuilder SetTrustedConnection()
+    public IConnectionStringBuilder AsTrusted()
     {
         return AddSetting("Trusted_Connection=True");
     }

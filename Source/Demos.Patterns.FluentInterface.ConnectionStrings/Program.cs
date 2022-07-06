@@ -29,3 +29,11 @@ string connectionString3 = FluentConnectionStringBuilder
     .WithPassword(Password)
     .Build();
 Console.WriteLine(connectionString3);
+
+string connectionString4 = FluentConnectionStringBuilder
+    .Create()
+    .ForServer(ServerName)
+    .AndDatabase(DatabaseName)
+    .AsTrusted()
+    .Build();
+Console.WriteLine(connectionString4);
