@@ -2,9 +2,23 @@
 
 namespace Demos.Patterns.FluentInterface.ConnectionStrings;
 
-internal sealed class FluentConnectionStringBuilder
+internal sealed class FluentConnectionStringBuilder :
+    IServerSelection,
+    IDatabaseSelection,
+    IUserSelection,
+    IPasswordSelection,
+    IConnectionStringBuilder
 {
     private readonly ICollection<string> settings = new List<string>();
+
+    private FluentConnectionStringBuilder()
+    {
+    }
+
+    public static IServerSelection Create()
+    {
+        return new FluentConnectionStringBuilder();
+    }
 
     private FluentConnectionStringBuilder AddSetting(string setting)
     {
@@ -13,22 +27,22 @@ internal sealed class FluentConnectionStringBuilder
         return this;
     }
 
-    public FluentConnectionStringBuilder ForServer(string serverName)
+    public IDatabaseSelection ForServer(string serverName)
     {
         return AddSetting($"Server={serverName}");
     }
 
-    public FluentConnectionStringBuilder AndDatabase(string databaseName)
+    public IUserSelection AndDatabase(string databaseName)
     {
         return AddSetting($"Database={databaseName}");
     }
 
-    public FluentConnectionStringBuilder AsUser(string userName)
+    public IPasswordSelection AsUser(string userName)
     {
         return AddSetting($"User Id={userName}");
     }
 
-    public FluentConnectionStringBuilder WithPassword(string password)
+    public IConnectionStringBuilder WithPassword(string password)
     {
         return AddSetting($"Password={password}");
     }

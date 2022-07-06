@@ -21,7 +21,8 @@ string connectionString2 = new ConnectionStringBuilder()
     .Build();
 Console.WriteLine(connectionString2);
 
-string connectionString3 = new FluentConnectionStringBuilder()
+string connectionString3 = FluentConnectionStringBuilder
+    .Create()
     .ForServer(ServerName)
     .AndDatabase(DatabaseName)
     .AsUser(UserName)
