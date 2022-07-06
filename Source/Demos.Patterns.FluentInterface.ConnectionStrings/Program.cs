@@ -20,3 +20,11 @@ string connectionString2 = new ConnectionStringBuilder()
     .SetTrustedConnection()
     .Build();
 Console.WriteLine(connectionString2);
+
+string connectionString3 = new FluentConnectionStringBuilder()
+    .SetServerName(ServerName)
+    .SetDatabaseName(DatabaseName)
+    .SetUserName(UserName)
+    .SetPassword(Password)
+    .Build();
+Console.WriteLine(connectionString3);
