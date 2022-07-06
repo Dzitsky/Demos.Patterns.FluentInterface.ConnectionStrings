@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Demos.Patterns.FluentInterface.ConnectionStrings;
 
@@ -31,6 +33,22 @@ internal sealed class FluentConnectionStringBuilder :
     public IDatabaseSelection ForServer(string serverName)
     {
         return AddSetting($"Server={serverName}");
+    }
+
+    public IDatabaseSelection ForServer(string serverName, Action<ServerOptions> optionsCallback)
+    {
+        var options = new ServerOptions();
+        optionsCallback(options);
+
+        var stringBuilder = new StringBuilder();
+        stringBuilder.Append($"Server={serverName}");
+
+        if (options.Port.HasValue)
+        {
+            stringBuilder.Append($",{options.Port}");
+        }
+
+        return AddSetting(stringBuilder.ToString());
     }
 
     public IUserSelection AndDatabase(string databaseName)

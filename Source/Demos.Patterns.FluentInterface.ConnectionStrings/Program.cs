@@ -46,3 +46,12 @@ string connectionString5 = FluentConnectionStringBuilder
     .EnableMars()
     .Build();
 Console.WriteLine(connectionString5);
+
+string connectionString6 = FluentConnectionStringBuilder
+    .Create()
+    .ForServer(ServerName, options => options.Port = 567)
+    .AndDatabase(DatabaseName)
+    .AsTrusted()
+    .EnableMars()
+    .Build();
+Console.WriteLine(connectionString6);
