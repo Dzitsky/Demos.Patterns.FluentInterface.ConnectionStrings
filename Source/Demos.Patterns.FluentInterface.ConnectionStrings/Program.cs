@@ -37,3 +37,12 @@ string connectionString4 = FluentConnectionStringBuilder
     .AsTrusted()
     .Build();
 Console.WriteLine(connectionString4);
+
+string connectionString5 = FluentConnectionStringBuilder
+    .Create()
+    .ForServer(ServerName)
+    .AndDatabase(DatabaseName)
+    .AsTrusted()
+    .EnableMars()
+    .Build();
+Console.WriteLine(connectionString5);

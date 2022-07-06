@@ -7,7 +7,8 @@ internal sealed class FluentConnectionStringBuilder :
     IDatabaseSelection,
     IUserSelection,
     IPasswordSelection,
-    IConnectionStringBuilder
+    IConnectionStringBuilder,
+    IAdditionSelection
 {
     private readonly ICollection<string> settings = new List<string>();
 
@@ -47,9 +48,14 @@ internal sealed class FluentConnectionStringBuilder :
         return AddSetting($"Password={password}");
     }
 
-    public IConnectionStringBuilder AsTrusted()
+    public IAdditionSelection AsTrusted()
     {
         return AddSetting("Trusted_Connection=True");
+    }
+
+    public IConnectionStringBuilder EnableMars()
+    {
+        return AddSetting("MultipleActiveResultSets=True");
     }
 
     public string Build()
