@@ -7,24 +7,28 @@ internal sealed class ConnectionStringBuilder
     private string? userName;
     private string? password;
 
-    public void SetServerName(string serverName)
+    public ConnectionStringBuilder SetServerName(string serverName)
     {
         this.serverName = serverName;
+        return this;
     }
 
-    public void SetDatabaseName(string databaseName)
+    public ConnectionStringBuilder SetDatabaseName(string databaseName)
     {
         this.databaseName = databaseName;
+        return this;
     }
 
-    public void SetUserName(string userName)
+    public ConnectionStringBuilder SetUserName(string userName)
     {
         this.userName = userName;
+        return this;
     }
 
-    public void SetPassword(string password)
+    public ConnectionStringBuilder SetPassword(string password)
     {
         this.password = password;
+        return this;
     }
 
     public string Build()
