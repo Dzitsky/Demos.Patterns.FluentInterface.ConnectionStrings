@@ -32,7 +32,7 @@ internal sealed class FluentConnectionStringBuilder :
 
     public IDatabaseSelection ForServer(string serverName)
     {
-        return AddSetting($"Server={serverName}");
+        return ForServer(serverName, _ => { });
     }
 
     public IDatabaseSelection ForServer(string serverName, Action<ServerOptions> optionsCallback)
